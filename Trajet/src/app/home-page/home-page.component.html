@@ -1,0 +1,13 @@
+<H1>Temps de trajet</H1>
+<div id="formulaire">
+  <form (ngSubmit)="onCalculeTemps()" id="form">
+    <input type="number" name="distance" id="distanceInput" [(ngModel)]="distance">
+    <input type="number" name="vitesseMoy" id="vitesseMoyInput" [(ngModel)]="vitesseMoy">
+    <input type="number" name="tempsRecharge" id="tempsRechargeInput" [(ngModel)]="tempsRecharge">
+    <button type="submit">Calculer</button>
+  </form>
+</div>
+
+<div id="resultat">
+  <p>Temps de trajet : {{tempsTrajet}}</p>
+</div>
