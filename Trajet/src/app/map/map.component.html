@@ -1,0 +1,13 @@
+<div id="formulaire">
+  <form (ngSubmit)="onAfficheTrajet()" id="form">
+    <input type="string" name="ville1" id="ville1Input" [(ngModel)]="ville1">
+    <input type="string" name="ville2" id="ville2Input" [(ngModel)]="ville2">
+    <button type="submit">Trajet</button>
+  </form>
+</div>
+
+<div class="map-container">
+  <div class="map-frame">
+    <div id="map"></div>
+  </div>
+</div>

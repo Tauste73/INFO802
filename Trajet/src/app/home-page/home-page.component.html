@@ -11,3 +11,20 @@
 <div id="resultat">
   <p>Temps de trajet : {{tempsTrajet}}</p>
 </div>
+
+
+
+<app-map></app-map>
+
+
+
+<div>
+  <ul>
+    <li *ngFor="let vehicule of mylistVehicule">
+        <p class="name">Marque : {{vehicule.naming.make}}</p>
+        <p class="name">Modèle : {{vehicule.naming.model}}</p>
+        <img src="{{ vehicule.media.image.thumbnail_url }}" alt="{{ vehicule.naming.make }}">
+    </li>
+  </ul>
+
+</div>

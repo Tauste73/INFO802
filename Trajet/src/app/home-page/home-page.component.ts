@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ListBornesService } from '../services/list-bornes.service';
+import { ListVehiculeService } from '../services/list-vehicule.service';
 import { TempsTrajetService } from '../services/temps-trajet.service';
 
 @Component({
@@ -6,13 +8,16 @@ import { TempsTrajetService } from '../services/temps-trajet.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
   distance : number = 4;
   vitesseMoy : number = 2;
   tempsRecharge : number = 1;
   tempsTrajet!: number;
+  mylistVehicule: any = [];
 
-  constructor(private tempsTrajetService: TempsTrajetService) { }
+
+  constructor(private tempsTrajetService: TempsTrajetService, private listVehicule: ListVehiculeService) {   }
+
 
 
 
@@ -27,6 +32,16 @@ export class HomePageComponent {
         });
       }
     )
+  }
+
+  ngOnInit(): void {
+    /*this.listVehicule.getListVehicule().subscribe(
+      (data) => {
+        console.log(data.data.vehicleList);
+        this.mylistVehicule = data.data.vehicleList
+      })*/
+
+
   }
 
 }

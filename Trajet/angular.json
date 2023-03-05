@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/leaflet/dist/leaflet.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -66,10 +67,7 @@
               "browserTarget": "Trajet:build:development"
             }
           },
-          "options": {
-            "browserTarget": "Trajet:build",
-            "proxyConfig": "src/proxy.conf.json"
-          },
+
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
