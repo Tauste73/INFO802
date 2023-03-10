@@ -1,20 +1,61 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ApolloQueryResult, gql } from "@apollo/client/core";
+import { Apollo } from "apollo-angular";
+
+const headers = {
+  'x-client-id': '63fdff59ca47b91b2f8f0546',
+  'x-app-id': '63fdff59ca47b91b2f8f0548',
+};
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListBornesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private apollo: Apollo) { }
 
-  getListBornes(): Observable<any>{
-    return this.http.get("https://odre.opendatasoft.com/api/records/1.0/search/?dataset=bornes-irve&q=&sort=n_amenageur&facet=region&facet=departement")
+  getListBornes(point : [number, number]): Observable<any>{
+    const query = gql`
+    query stationAround($query: StationAroundQuery!){
+      stationAround(
+          query: $query
+          size: 1
+        ) {
+          location {
+            type
+            coordinates
+          }
+          power
+          speed
+          status
+          }
+      }
+
+    `;
+    return this.apollo.watchQuery<any>({
+      query : query,
+      variables: {
+        query: {
+          location: {
+            type: "Point",
+            coordinates: [
+              point[0],
+              point[1]
+            ]
+          },
+          distance: 10000
+        }
+      },
+      context: {
+        headers,
+      },
+    }).valueChanges;
 
   }
 
 
-
-
 }
+

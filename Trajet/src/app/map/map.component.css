@@ -15,3 +15,30 @@
   height: 100%;
 }
 
+.listVehicule {
+  /*encré a droite*/
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  /*couleur de fond*/
+  background-color: #f1f1f1;
+  /*couleur de bordure*/
+  border: 1px solid #ccc;
+  /*couleur de texte*/
+  color: #444;
+  /*couleur de fond des liens*/
+  background-color: #f1f1f1;
+  /*couleur de fond des liens survolés*/
+  background-color: #ddd;
+  /*couleur de fond des liens sélectionnés*/
+  background-color: #ccc;
+  /*couleur de fond des liens actifs*/
+  background-color: #bbb;
+  /*couleur de fond des liens actifs survolés*/
+  background-color: #aaa;
+  /*couleur de fond des liens actifs sélectionnés*/
+  background-color: #999;
+
+
+}

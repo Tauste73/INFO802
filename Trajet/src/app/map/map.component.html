@@ -11,3 +11,16 @@
     <div id="map"></div>
   </div>
 </div>
+
+
+
+<div class="listVehicule">
+  <ul>
+    <li *ngFor="let vehicule of mylistVehicule">
+        <p class="name">Marque : {{vehicule.naming.make}}</p>
+        <p class="name">Modèle : {{vehicule.naming.model}}</p>
+        <img src="{{ vehicule.media.image.thumbnail_url }}" alt="{{ vehicule.naming.make }}" (click)="selectVehicule(vehicule)">
+    </li>
+  </ul>
+
+</div>

@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit{
   vitesseMoy : number = 2;
   tempsRecharge : number = 1;
   tempsTrajet!: number;
-  mylistVehicule: any = [];
+
 
 
   constructor(private tempsTrajetService: TempsTrajetService, private listVehicule: ListVehiculeService) {   }

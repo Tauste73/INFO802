@@ -22,7 +22,7 @@ export class ListVehiculeService {
     query {
       vehicleList(
         page: 0,
-        size: 800
+        size: 20
       ) {
         id
         naming {
