@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -34,7 +35,6 @@
     "graphql-tag": "^2.12.6",
     "leaflet": "^1.9.3",
     "lodash": "^4.17.21",
-    "material": "^0.5.3",
     "rxjs": "~7.8.0",
     "sax": "^1.2.4",
     "stream": "^0.0.2",
