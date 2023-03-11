@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './map/map.component';
 import { GraphQLModule } from './graphql.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NoopAnimationPlayer } from '@angular/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({

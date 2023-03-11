@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Inject } from '@angular/core';
+import { Component, AfterViewInit} from '@angular/core';
 import * as L from 'leaflet';
 import { TrajetService } from '../services/trajet.service';
 import { Cities} from 'countries-states-cities-service'
