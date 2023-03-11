@@ -16,7 +16,7 @@ httpOptions = {
 
   constructor(private http: HttpClient) { }
 
-  getTempsTrajet(distance: number, vitesseMoy: number, tempsRecharge: number): Observable<any>{
+  getTempsTrajet(distance: number, vitesseMoy: number, tempsRechargeMinutes: number, nbRecharge: number): Observable<any>{
 
     var request : String = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spy="spyne.examples.tempstrajet.soap">\
     <soapenv:Header/>\
@@ -24,6 +24,8 @@ httpOptions = {
        <spy:tempstrajet>\
           <spy:distance>'+distance+'</spy:distance>\
           <spy:vitessemoy>'+vitesseMoy+'</spy:vitessemoy>\
+          <spy:tempsRechargeMinutes>'+tempsRechargeMinutes+'</spy:tempsRechargeMinutes>\
+          <spy:nbRecharge>'+nbRecharge+'</spy:nbRecharge>\
        </spy:tempstrajet>\
     </soapenv:Body>\
  </soapenv:Envelope>';
@@ -32,4 +34,13 @@ httpOptions = {
 
     return this.http.post('http://localhost:8000/?wsdl', request, this.httpOptions)
   }
+
+  convertMinutesToHours(minutes: number): Observable<any>{
+
+    var jsonObject = {minute : minutes}
+
+    return this.http.post('http://localhost:3000/convertmtoh', jsonObject)
+  }
+
+
 }

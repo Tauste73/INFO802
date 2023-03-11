@@ -8,10 +8,10 @@ from spyne import Integer, Unicode , Decimal
 
 
 class TempsTrajetService(ServiceBase):
-    @rpc(Decimal, Decimal, _returns=Decimal)
-    def tempstrajet(ctx, distance, vitessemoy):
+    @rpc(Decimal, Decimal, Decimal, Decimal, _returns=Decimal)
+    def tempstrajet(ctx, distance, vitessemoy, tempsRechargeMinutes, nbRecharge):
         ctx.transport.resp_headers['Access-Control-Allow-Origin'] = '*'
-        return (distance / vitessemoy)
+        return (distance / vitessemoy) * 60 + nbRecharge * tempsRechargeMinutes
 
 
 

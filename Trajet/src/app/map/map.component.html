@@ -1,10 +1,36 @@
 <div id="formulaire">
   <form (ngSubmit)="onAfficheTrajet()" id="form">
-    <input type="string" name="ville1" id="ville1Input" [(ngModel)]="ville1">
-    <input type="string" name="ville2" id="ville2Input" [(ngModel)]="ville2">
+    <label>Ville de départ</label>
+    <input type="string" name="ville1" id="ville1Input" [(ngModel)]="ville1" required>
+    <label>Ville d'arrivée</label>
+    <input type="string" name="ville2" id="ville2Input" [(ngModel)]="ville2" required>
+
+
+    <div class="listVehicule">
+      <ul>
+        <li *ngFor="let vehicule of mylistVehicule" (click)="selectVehicule(vehicule)">
+            <p class="name">Marque : {{vehicule.naming.make}}</p>
+            <p class="name">Modèle : {{vehicule.naming.model}}</p>
+            <p class="name">Autonomie : {{vehicule.range.chargetrip_range.best}} Km</p>
+            <p class="name">Temps de recharge : {{vehicule.connectors[0].time}} Minutes</p>
+            <img id="img" src="{{ vehicule.media.image.thumbnail_url }}" alt="{{ vehicule.naming.make }}" >
+        </li>
+      </ul>
+
+    </div>
+
+
     <button type="submit">Trajet</button>
   </form>
 </div>
+
+<div id="resultat">
+  <p>Temps de trajet : {{tempsTrajet}} Minutes</p>
+  <p>Temps de trajet : {{tempsTrajetHeures}} Heures</p>
+</div>
+
+
+
 
 <div class="map-container">
   <div class="map-frame">
@@ -14,13 +40,6 @@
 
 
 
-<div class="listVehicule">
-  <ul>
-    <li *ngFor="let vehicule of mylistVehicule">
-        <p class="name">Marque : {{vehicule.naming.make}}</p>
-        <p class="name">Modèle : {{vehicule.naming.model}}</p>
-        <img src="{{ vehicule.media.image.thumbnail_url }}" alt="{{ vehicule.naming.make }}" (click)="selectVehicule(vehicule)">
-    </li>
-  </ul>
 
-</div>
+
+
