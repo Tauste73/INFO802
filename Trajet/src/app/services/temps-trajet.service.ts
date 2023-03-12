@@ -32,14 +32,14 @@ httpOptions = {
 
 
 
-    return this.http.post('http://localhost:8000/?wsdl', request, this.httpOptions)
+    return this.http.post('https://info-802-soap.vercel.app/?wsdl', request, this.httpOptions)
   }
 
   convertMinutesToHours(minutes: number): Observable<any>{
 
     var jsonObject = {minute : minutes}
 
-    return this.http.post('http://localhost:3000/convertmtoh', jsonObject)
+    return this.http.post('https://info-802-nodejs.vercel.app/convertmtoh', jsonObject)
   }
 
 
