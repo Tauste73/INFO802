@@ -21,8 +21,8 @@ export class ListVehiculeService {
     const query = gql`
     query {
       vehicleList(
-        page: 1,
-        size: 40
+        page: 0
+        size: 20
       ) {
         id
         naming {

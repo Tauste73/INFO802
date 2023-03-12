@@ -26,6 +26,7 @@ export class MapComponent implements AfterViewInit {
   ville2! : string
   private map : any;
   lgMarkers = new L.LayerGroup();
+  trajetMarkers = new L.LayerGroup();
   mylistVehicule: any = [];
   autonomieVehicule!: number;
   distance! : number;
@@ -37,11 +38,20 @@ export class MapComponent implements AfterViewInit {
 
   borneIcon = L.icon({
     iconUrl: '../assets/borne.png',
-    iconSize:     [38, 65], // size of the icon
+    iconSize:     [48, 65], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+  villeIcon = L.icon({
+  iconUrl: '../assets/leaf-green.png',
+  iconSize:     [48, 65], // size of the icon
+  shadowSize:   [50, 64], // size of the shadow
+  iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+  shadowAnchor: [4, 62],  // the same for the shadow
+  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
 
@@ -70,6 +80,7 @@ export class MapComponent implements AfterViewInit {
 
 
     this.map.addLayer(this.lgMarkers);
+    this.map.addLayer(this.trajetMarkers);
 
 
 
@@ -82,12 +93,12 @@ export class MapComponent implements AfterViewInit {
     allCity.find((city) => {
       if(city.name == this.ville1){
         this.point1 = [city.longitude, city.latitude]
-        L.marker([Number(city.latitude), Number(city.longitude)]).addTo(this.map).addTo(this.lgMarkers);
+        L.marker([Number(city.latitude), Number(city.longitude)], {icon: this.villeIcon}).addTo(this.map).addTo(this.lgMarkers);
         this.map.setView([Number(city.latitude), Number(city.longitude)], 10);
       }
       if(city.name == this.ville2){
         this.point2 = [city.longitude, city.latitude]
-        L.marker([Number(city.latitude), Number(city.longitude)]).addTo(this.map).addTo(this.lgMarkers);
+        L.marker([Number(city.latitude), Number(city.longitude)], {icon: this.villeIcon}).addTo(this.map).addTo(this.lgMarkers);
       }
     }
     )
@@ -134,18 +145,20 @@ export class MapComponent implements AfterViewInit {
   //Récupère la liste de bornes à proximité des points
   recupListBornes(pList: any){
     let listPoint: any = [];
-    listPoint.push(this.point1);
+    listPoint.unshift(this.point1);
         if(pList.length > 0){
-        pList.forEach((point: any) => {
+        pList.reverse().forEach((point: any) => {
           this.listBornes.getListBornes(point).subscribe(
             (data) => {
               data.data.stationAround.forEach((station: any) => {
                 L.marker([station.location.coordinates[1], station.location.coordinates[0]], {icon: this.borneIcon}).addTo(this.map).addTo(this.lgMarkers);
 
                 point  = [station.location.coordinates[0].toString(), station.location.coordinates[1].toString()];
-                listPoint.push(point);
+                //listPoint.push(point);
+                listPoint.splice(1, 0, point);
               }
               )
+
               this.trajetFinal(listPoint);
 
             }
@@ -161,13 +174,15 @@ export class MapComponent implements AfterViewInit {
 
   //Récupère et affiche le trajet final en passant par toutes les bornes
   trajetFinal(listPoint: any){
+    this.trajetMarkers.clearLayers();
+    //listPoint = listPoint.sort()
 
     listPoint.push(this.point2);
     console.log(listPoint);
     this.trajet.getFinalTrajet(listPoint).subscribe(
       (data) => {
         console.log(data);
-        L.geoJSON(data).addTo(this.map).addTo(this.lgMarkers);
+        L.geoJSON(data).addTo(this.map).addTo(this.lgMarkers).addTo(this.trajetMarkers);
         this.onCalculeTemps();
 
           }
